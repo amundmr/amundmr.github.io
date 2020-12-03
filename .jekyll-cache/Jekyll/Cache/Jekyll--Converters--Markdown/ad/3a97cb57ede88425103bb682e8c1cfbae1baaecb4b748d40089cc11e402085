@@ -1,4 +1,4 @@
-I":(<p>This project started in the winter of 2017/2018, and I can safley say it has taken way too much time. In this Article I will walk you trough how I made it, and I will try to be structured so you can read individual sections by themselves. This electric mountainboard was made on an extreme budget, see parts list for price estimates.</p>
+I"�-<p>This project started in the winter of 2017/2018, and I can safley say it has taken way too much time. In this Article I will walk you trough how I made it, and I will try to be structured so you can read individual sections by themselves. This electric mountainboard was made on an extreme budget, see parts list for price estimates.</p>
 
 <p>Before we start we will need some parts, so go ahead and aquire the following:</p>
 
@@ -23,24 +23,29 @@
   <li>3mm flat unisolated ribbon-metal with soldercoat (6USD @Amazon)</li>
   <li>18650 Battery brackets (5USD @eBay)</li>
   <li>Power analyzer, Wattmeter (10USD @ Amazon)</li>
-  <li>6 pcs Bolts with nuts,  1/4-20 by 1/2″ long bolts (rouded head with hex-key) UNC standard size nuts (5 USD @ eBay) 
-Total cost: 353$</li>
+  <li>6 pcs Bolts with nuts,  1/4-20 by 1/2″ long bolts (rouded head with hex-key) UNC standard size nuts (5 USD @ eBay)</li>
 </ul>
+
+<p>Total cost: 353$</p>
 
 <p>Please note I also bought a couple of extras to this board:</p>
 
-<p>Balance charger, iMAX B6 (20USD @ eBay)
-Battery-chargning module, BST900 (20USD @ eBay)
-So with everything, it cost me 383 USD, which can be rounded up to 400USD for a little margin.</p>
+<ul>
+  <li>Balance charger, iMAX B6 (20USD @ eBay)</li>
+  <li>Battery-chargning module, BST900 (20USD @ eBay)</li>
+</ul>
+
+<p>So with everything, it cost me 383USD, which can be rounded up to <em>400USD</em> for a little margin.</p>
 
 <p>So, you will need access to a 3D-printer, and this can be extra cost for you if you need to pay for filament. Also, if you are not as lucky as me, to find a cheap MTB for sale locally, this might also be very expensive. Hot tip: The motorcontroller are only sold two at the time from the official seller, so either you buy two, and sell one (like i did) or you are lucky and find someone who sells one. The rest is pretty easy to get hold of, unless you dont have a source for batteries.</p>
 
-<p>The Making!
-Battery
-Motor-mounts
-Drivetrain
-Motorcontroller
-Battery</p>
+<h1 id="the-making">The Making!</h1>
+<p>Battery<br />
+Motor-mounts<br />
+Drivetrain<br />
+Motorcontroller</p>
+
+<h2 id="battery">Battery</h2>
 
 <p>The battery was a pain in the start. Everyone seasoned in the 18650 scene(18650 is a li-ion battery cell type) knows that you should always spot weld the cells together to avoid heating up the battery too much. Heating a battery cell might damage it. However, I had no spot welder, and I couldn’t afford one either. If you have a spot welder, please go search the internet for how to make battery packs with it.</p>
 
@@ -50,105 +55,109 @@ Battery</p>
 
 <p>Click here for the video series.</p>
 
-<p>Step 1:</p>
+<p><strong>Step 1:</strong></p>
 
 <p>Open the batterypacks from the laptops!</p>
 
-<p>laptopbatteri</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/laptopbatteri.jpg" alt="" width="100%" /></p>
 
 <p>This is what one of the latop-batteries look like half opened. How to get them open, you will have to figure out for each individual battery design, but a hot tip, is to start at the seams.</p>
 
-<p>Step 2:</p>
+<p><strong>Step 2:</strong></p>
 
 <p>After the batteries are opened, and each cell individualized, you can start to test them. How to do this, you should google. I soldered them together, put them on the charger, and if anyone got “hot” during the charge, they were bad. Not the best technique, but I had limited time.</p>
 
-<p>batteritest</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/batteritest.jpg" alt="" width="100%" /></p>
 
-<p>Step 3:</p>
+<p><strong>Step 3:</strong></p>
 
 <p>Now it’s time to put them together, and solder them together. The start for me looked like this:</p>
 
-<p>btryinbracket</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/btryinbracket.jpg" alt="" width="100%" /></p>
 
-<p>Step 4:</p>
+<p><strong>Step 4:</strong></p>
 
 <p>Now you sould solder on the BMS, and all the lead wires. How to do that, you can see here.</p>
 
 <p>The battery can look something like this when finished:</p>
 
-<p>batteri</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/batteri.jpg" alt="" width="100%" /></p>
 
-<p>Motor-mounts</p>
+<h2 id="motor-mounts">Motor-mounts</h2>
 
 <p>The motor mounts was a pain in themselves. After many iterations, and failed 3D prints, this is the prints I advise you to use.</p>
 
-<p>Step 1:</p>
+<p><strong>Step 1:</strong></p>
 
 <p>The way we mount the motors to the board, is with the bolt-holes from the brakes of the MBS atom. So go ahead and remove the brakes. These bolt holes are M8 threaded, so this is where we will use our M8 threaded rod.</p>
 
-<p>Step 2:</p>
+<p><strong>Step 2:</strong></p>
 
 <p>Print the motor mount bracket, and test-fit it on the board. Put on nuts like shown in this pictue:</p>
 
-<p>(please disregard the brackets &amp; chains and everything on the wheels, we will get to that later)Brakett</p>
+<p>(please disregard the brackets &amp; chains and everything on the wheels, we will get to that later)
+<img src="/img/posts/2019-09-25-Electric-MountainBoard/Brakett.jpg" alt="" width="100%" /></p>
 
-<p>Step 3:</p>
+<p><strong>Step 3:</strong></p>
 
 <p>After test-fitting, go ahead and cut the metal rod to fit. Get it done for both sides. Now press nuts into the nut-holes on the 3D-printed brackets. After that, you can cut fitting rods that fit between the brackets like so:</p>
 
-<p>motor mount</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/motor_mount.jpg" alt="" width="100%" /></p>
 
 <p>You can go ahead and secure the rods in the truck with threadlock, but dont secure the nuts holding the motorbrackets! You will need to adjust the height of the brackets later.</p>
 
-<p>Drivetrain</p>
+<h2 id="drivetrain">Drivetrain</h2>
 
 <p>The drivetrain was maybe the easiest of all. Here, I came up with a 3D print for holding the sprocket to the wheel.</p>
 
-<p>Step 1:</p>
+<p><strong>Step 1:</strong></p>
 
 <p>Just remove the brake-discs from the two wheels with brakes. Remember to deflate the tires first.</p>
 
-<p>Step 2:</p>
+<p><strong>Step 2:</strong></p>
 
 <p>Put the 1/2-20 nuts for the sprocket in the 3d print, and then place the 3d print in the wheel. Afterwords, tighten the 3D-print to the Wheel with the bolts that held the brakediscs.</p>
 
-<p>Step 3:</p>
+<p><strong>Step 3:</strong></p>
 
 <p>Bolt the sprocket to the 3d print with the 1/4”-20 bolts. Now the wheel sprockets are done.</p>
 
-<p>sprocket</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/sprocket.jpg" alt="" width="100%" /></p>
 
-<p>Step 4:</p>
+<p><strong>Step 4:</strong></p>
 
 <p>File a flat spot on the motor shaft, and put on the small sprocket on the motor shaft, and tighten the screw. Make sure to put a lot of thread lock on this, unless you want it to fall off when you are riding down a hill and suddenly looses brakes :D</p>
 
-<p>motorsprocket</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/motorsprocket.jpg" alt="" width="100%" /></p>
 
-<p>Step 5:</p>
+<p><strong>Step 5:</strong></p>
 
 <p>Test-fit the chain, and cut it to lenght. To put on the chain afterwords, you just slide the motor mount down to the truck, put on the chain, and then pull up the motor mount so that the chain is tight enough.</p>
 
-<p>It will probalby look something like this:chain</p>
+<p>It will probalby look something like this:</p>
 
-<p>Motorcontroller / ESC</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/chain.jpg" alt="" width="100%" /></p>
+
+<h2 id="motorcontroller--esc">Motorcontroller / ESC</h2>
 
 <p>The motorcontroller which I bought off of aliexpress for so cheap was a real pain. The problem was that the brakes was way to sudden(and strong). It also accellerated very uncontrollably. I will strongly advice anyone to just buy a real ESC, for example a FlipSky (FSESC) 4.20 or better. It will save you a lot of time. However, I made due with this motorcontroller.</p>
 
-<p>Step 1:</p>
+<p><strong>Step 1:</strong></p>
 
 <p>First check if everything works. Hook it up to the battery, motors and remote and test throttle and brake.</p>
 
-<p>Step 2:</p>
+<p><strong>Step 2:</strong></p>
 
 <p>How I made my box I currently dont have the time to write as it took such a long time. I decided to make it a little beautiful, and put some cooling and lights on it. You can probably just stick it in a box and get it fastened to your board somehow. How I made mine was with Fusion 360, and a 3D printer at my university. Here are some pictures of the making of my ESC-box:</p>
 
-<p>eMTB ESC boxlideMTB ESC box</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/eMTB_ESC-box.jpg" alt="" width="100%" />
+<img src="/img/posts/2019-09-25-Electric-MountainBoard/eMTB_ESC-boxlid.jpg" alt="" width="100%" /></p>
 
 <p>What you see in this latest picture is the motorcontroller (ESC) in the top right, power analyzer (inline with battery cables going to ESC) and a 40-12V step down converter for powering the fan, the two red lights which will be put in the black holes in the back and the headlight. The completed unit looks like this:</p>
 
-<p>eMTB box</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/eMTB-box.png" alt="" width="100%" /></p>
 
-<p>Results</p>
+<h2 id="results">Results</h2>
 
 <p>It rides at a top speed of around 30km/h (personal best), and goes around 8km on a charge. The wear on these cheap tires are phenomenal and you should count new tires every 40 km (or just buy expensive street tires). Immediately below are a couple of pictures and a video.</p>
 
