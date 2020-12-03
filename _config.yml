@@ -20,11 +20,10 @@
 
 title: Amund Midtgard Raniseth
 email: amund.raniseth@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  This website is a project which aims to be a pleasant documentation space for other personal projects.
+description: This website is a project which aims to be a pleasant documentation space for other personal projects.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: -
+linkedin_username: amund-midtgard-raniseth-9a551519a
 github_username:  amundmr
 
 # Build settings
