@@ -58,7 +58,7 @@ In this project I will make a 10S battery. That means 10 cells in series, for a 
 
 This tutorial will not be good enough for you to follow alone. I STRONGLY advise you to watch this entire series of how to build one, before building your own.
 
-Click here for the video series.
+Click [here](https://www.youtube.com/watch?v=b3eRv_FZjBc&index=1&list=PLPqn8bOJKP_nYD-BAKxJHOYovjickM3wD&ab_channel=EbikeSchool.com) for the video series.
 
 **Step 1:**
 
@@ -85,7 +85,7 @@ Now it's time to put them together, and solder them together. The start for me l
 
 **Step 4:**
 
-Now you sould solder on the BMS, and all the lead wires. How to do that, you can see here.
+Now you sould solder on the BMS, and all the lead wires. How to do that, you can see [here](https://www.youtube.com/watch?v=u-4mKh1WaLo&list=PLPqn8bOJKP_nYD-BAKxJHOYovjickM3wD&index=3&ab_channel=EbikeSchool.com).
 
 The battery can look something like this when finished:
 
@@ -168,7 +168,7 @@ What you see in this latest picture is the motorcontroller (ESC) in the top righ
 
  
 
-## Results
+# Results
 
 It rides at a top speed of around 30km/h (personal best), and goes around 8km on a charge. The wear on these cheap tires are phenomenal and you should count new tires every 40 km (or just buy expensive street tires). Immediately below are a couple of pictures and a video.
 
@@ -179,9 +179,9 @@ eMTB fronteMTB Box low angleMountainBoard
 
 This video is from mid-prototyping but it's better than nothing. Maybe I'll update with a video of the new sleek design later.
 
-[](https://www.youtube.com/watch?v=EecQrC86ZSs&feature=youtu.be)
+[Youtube video](https://www.youtube.com/watch?v=EecQrC86ZSs&feature=youtu.be)
 
-## Discussion
+# Discussion
 
 At this point I decided to end the project. I've had a lot of troubles with the ESC trying to make it smoother so it doesn't kill you. However, no matter what I did to the firmware, or what kind of hacks I pulled on the remote (and the ESC), it was just no hope for it.
 
@@ -191,7 +191,7 @@ Also the batteries are very difficult to charge since they have different capaci
 
 Now, this is an extreme budget build, but it just shows how much you can still make if you are on a budget. I wanted an electric skateboard, and I made one. However, I quickly figured it was much more comfortable to just ride a bike, so I will probably not use this e-board alot.. 
 
-## Conclusion
+# Conclusion
 
 If you are a seasoned skater, and low on cash, this could be a build for you. You get extreme amounts of fun for a very low entry price. Howerver, you must count building hours as fun for this to be correct. Thank you for reading trough the entire article, hope it was helpful or entertaining. 
 

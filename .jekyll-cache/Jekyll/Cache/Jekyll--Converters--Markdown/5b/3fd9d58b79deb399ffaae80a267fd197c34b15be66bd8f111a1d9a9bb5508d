@@ -1,4 +1,4 @@
-I"�-<p>This project started in the winter of 2017/2018, and I can safley say it has taken way too much time. In this Article I will walk you trough how I made it, and I will try to be structured so you can read individual sections by themselves. This electric mountainboard was made on an extreme budget, see parts list for price estimates.</p>
+I"�/<p>This project started in the winter of 2017/2018, and I can safley say it has taken way too much time. In this Article I will walk you trough how I made it, and I will try to be structured so you can read individual sections by themselves. This electric mountainboard was made on an extreme budget, see parts list for price estimates.</p>
 
 <p>Before we start we will need some parts, so go ahead and aquire the following:</p>
 
@@ -53,7 +53,7 @@ Motorcontroller</p>
 
 <p>This tutorial will not be good enough for you to follow alone. I STRONGLY advise you to watch this entire series of how to build one, before building your own.</p>
 
-<p>Click here for the video series.</p>
+<p>Click <a href="https://www.youtube.com/watch?v=b3eRv_FZjBc&amp;index=1&amp;list=PLPqn8bOJKP_nYD-BAKxJHOYovjickM3wD&amp;ab_channel=EbikeSchool.com">here</a> for the video series.</p>
 
 <p><strong>Step 1:</strong></p>
 
@@ -161,13 +161,16 @@ Motorcontroller</p>
 
 <p>It rides at a top speed of around 30km/h (personal best), and goes around 8km on a charge. The wear on these cheap tires are phenomenal and you should count new tires every 40 km (or just buy expensive street tires). Immediately below are a couple of pictures and a video.</p>
 
-<p>eMTB fronteMTB Box low angleMountainBoard</p>
+<p><img src="/img/posts/2019-09-25-Electric-MountainBoard/eMTB_front.png" alt="" width="100%" />
+<img src="/img/posts/2019-09-25-Electric-MountainBoard/eMTB_low_angle.png" alt="" width="100%" />
+<img src="/img/posts/2019-09-25-Electric-MountainBoard/MountainBoard.png" alt="" width="100%" />
+eMTB fronteMTB Box low angleMountainBoard</p>
 
 <p>This video is from mid-prototyping but it’s better than nothing. Maybe I’ll update with a video of the new sleek design later.</p>
 
-<p>https://www.youtube.com/watch?v=EecQrC86ZSs&amp;feature=youtu.be</p>
+<p><a href="https://www.youtube.com/watch?v=EecQrC86ZSs&amp;feature=youtu.be"></a></p>
 
-<p>Discussion</p>
+<h2 id="discussion">Discussion</h2>
 
 <p>At this point I decided to end the project. I’ve had a lot of troubles with the ESC trying to make it smoother so it doesn’t kill you. However, no matter what I did to the firmware, or what kind of hacks I pulled on the remote (and the ESC), it was just no hope for it.</p>
 
@@ -177,7 +180,7 @@ Motorcontroller</p>
 
 <p>Now, this is an extreme budget build, but it just shows how much you can still make if you are on a budget. I wanted an electric skateboard, and I made one. However, I quickly figured it was much more comfortable to just ride a bike, so I will probably not use this e-board alot..</p>
 
-<p>Conclusion</p>
+<h2 id="conclusion">Conclusion</h2>
 
 <p>If you are a seasoned skater, and low on cash, this could be a build for you. You get extreme amounts of fun for a very low entry price. Howerver, you must count building hours as fun for this to be correct. Thank you for reading trough the entire article, hope it was helpful or entertaining.</p>
 
