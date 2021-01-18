@@ -1,0 +1,37 @@
+I"<p>I was just so tired of having only low intensity headlamps available to me, and as a student, the price of 140USD was just unbearable for a 800 lumen headlamp. And ofcourse, it is much more fun to make your own! It was intended to use it as a bike-light for afternoons in the forests with my mountainbike, but because of parts delay it wasnt finished before the snow claimed the forest trails.</p>
+
+<p><strong>Parts</strong><br />
+All prices are in NOK</p>
+<ul>
+  <li><a href="https://www.ebay.com/itm/10W-20W-30W-50W-100W-LED-COB-Chip-High-Power-Verwendet-f%C3%BCr-LED-Fluter-12V-36V/264024551680?ssPageName=STRK%3AMEBIDX%3AIT&amp;var=564224232059&amp;_trksid=p2057872.m2749.l2649">50W COB LED (37,-)</a></li>
+  <li><a href="https://www.ebay.com/itm/DC-DC-Boost-Converter-Step-Up-Step-Down-Power-Adjustable-Portable-Charger/382336813865?ssPageName=STRK%3AMEBIDX%3AIT&amp;_trksid=p2057872.m2749.l2649">Reflector + collimator lens kit for the COB LED (24,-)</a></li>
+  <li><a href="https://www.ebay.com/itm/Silicone-Wire-18-20-22-24-26-28-AWG-Soft-Cable-Flexible-Tinned-Copper-2M-5M-10M/401631127174?ssPageName=STRK%3AMEBIDX%3AIT&amp;var=672143834979&amp;_trksid=p2057872.m2749.l2649">5m 18AWG flexible silicone wire (46,-)</a></li>
+  <li><a href="https://www.ebay.com/itm/DC-DC-Boost-Converter-Step-Up-Step-Down-Power-Adjustable-Portable-Charger/382336813865?ssPageName=STRK%3AMEBIDX%3AIT&amp;_trksid=p2057872.m2749.l2649">DC-DC Boost converter up to 32V, 50W (35,-)</a></li>
+  <li><a href="https://www.ebay.com/itm/DC-DC-Boost-Converter-Step-Up-Step-Down-Power-Adjustable-Portable-Charger/382336813865?ssPageName=STRK%3AMEBIDX%3AIT&amp;_trksid=p2057872.m2749.l2649">3S 12V 25A Li-ion BMS (20,-)</a></li>
+  <li>Potentiometer 16k</li>
+  <li>Batteries, the amount must fit your BMS. I had old laptop batteries laying around.</li>
+  <li>Some 3D printing filament and access to a 3D printer (I spent around 45,- on the entire filament.)</li>
+  <li>Heatsink which fits the COB-led. I had one laying around from an old computer.</li>
+  <li>Wire; I used old lamp wire.</li>
+  <li>Heat conducting paste.</li>
+  <li>Solder and heatshrink</li>
+</ul>
+
+<p>Total price: 167,- NOK (20USD)</p>
+
+<h1 id="design">Design</h1>
+<p>When working with what was at hand, and wanting to do this quick, I matched my parts selection to fit whatever I already had. 
+It consists of one 12V battery, designed to be used for other purposes as well. This is then directly plugged in to the boost converter, which has the dimming potentiometer. From here, a wire pair runs up to the headlamp, where the LED is sandwiched between the heatsink and the collimator lens.</p>
+
+<h2 id="battery">Battery</h2>
+<p>Since I had old laptop batteries, I found that for a 50W LED, and some loss in the boost converter, I needed at least 100Wh in the battery pack to last two hours. Thus, It could not be mounted on my head and had to be remote, either in a pocket or in a backpack. The cells I had was rated at 7Wh each, but is probably more like 5Wh. This meant that I needed 20 cells to reach 100Wh!</p>
+
+<p>This was very much, and I didn’t have enough cells for this. What I did was to put four cells in series, and three of these ones in paralell(3S4P). 
+<img src="/img/posts/2021-01-15-Power-Headlamp/Batt1.png" alt="" width="100%" />
+This meant a potential of 12V, and a much needed high current from the 4P, as old laptop batteries probably have a very low C-rate limit. This added up to only 12 cells and 60Wh, which is enough for one hour on full power. This is acceptable since the headlamp is way too bright at full power, and will probably be used the most on 10% during climbs, and 60% during decents. The full 100% power is mostly used for scouting, very open areas or signaling.
+<img src="/img/posts/2021-01-15-Power-Headlamp/Batt2.png" alt="" width="100%" /></p>
+
+<p>The cell testing was done on a IMAX B6 eBay clone. The test was beeing fully charged, then discharged, and charged again. The cells were put in paralell groups so the capacities would match between the paralell groups.
+Lastly, the BMS was soldered in, together with a XT90 connector. This can in retrospect just have been directly soldered to the boost converter, since I haven’t found other uses for the battery pack just yet.
+<img src="/img/posts/2021-01-15-Power-Headlamp/Batt3.png" alt="" width="100%" /></p>
+:ET
