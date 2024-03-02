@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="opml.xsl"?>
 <opml version="2.0">
   <head>
-    <title>A list of feeds I follow</title>
+    <title>Amund Raniseth's blogroll</title>
   </head>
   <body>
     <outline text="TU" xmlUrl="https://www.tu.no/feeds/general.xml" type="rss"
