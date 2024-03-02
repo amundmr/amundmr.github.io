@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>A list of feeds I follow</title>
+  </head>
+  <body>
+    <outline text="TU" xmlUrl="https://www.tu.no/feeds/general.xml" type="rss"
+      htmlUrl="https://www.tu.no/" description="" />
+    <outline text="Digi" xmlUrl="https://www.digi.no/rss" type="rss"
+      htmlUrl="https://www.digi.no" description="" />
+    <outline text="Home Assistant" xmlUrl="https://www.home-assistant.io/atom.xml" type="rss"
+      htmlUrl="https://www.home-assistant.io/blog" description="" />
+    <outline text="Knut Magnus Aasrud" xmlUrl="https://kmaasrud.com/atom.xml" type="rss"
+      htmlUrl="https://www.kmaasrud.com/" description="Magnus Aasrud's personlige blog" />
+    <outline text="Energy Storage News" xmlUrl="https://www.energy-storage.news/feed/" type="rss"
+      htmlUrl="https://www.energy-storage.news/" description="" />
+    <!-- more outline elements with feeds... -->
+  </body>
+</opml>
