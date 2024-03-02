@@ -15,6 +15,8 @@
       htmlUrl="https://www.kmaasrud.com/" description="Magnus Aasrud's personlige blog" />
     <outline text="Energy Storage News" xmlUrl="https://www.energy-storage.news/feed/" type="rss"
       htmlUrl="https://www.energy-storage.news/" description="" />
+    <outline text="Nature" xmlUrl="https://www.nature.com/nature.rss" type="rss"
+      htmlUrl="https://www.nature.com/nature" description="Nature journal" />
     <!-- more outline elements with feeds... -->
   </body>
 </opml>
