@@ -21,7 +21,6 @@ fg.link( href=DOMAIN, rel='alternate' )
 blogposts = [x for x in os.listdir(BLOG_PATH) if x.endswith(".html")]
 blogposts.remove("template.html")
 
-print(blogposts)
 # Add blogposts to feed
 for bp in blogposts:
 
