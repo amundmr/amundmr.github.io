@@ -14,31 +14,38 @@
 <sup><em>2025-01-04</em></sup>
 
 <p>
-Happy new years! Or so I thought. After a refreshing christmas vacation with my family, I was just stashing something away in our storage room when I noticed the server fan running at maximum. This was very unexpected considering my server is running an Intel i3, and should handle all the light tasks I run quite effortlessly. Anyways, I continued the day of unpacking and didn't think much more of it. Today while running a simulation on my laptop, the fan noise made me remember my earlier observation, and I SSH'ed in to my server to check the status.
+Happy New Year! Or so I thought. After a refreshing Christmas vacation with my family, I was stashing something away in our storage room when I noticed the server fan running at maximum speed. This was very unexpected, considering my server is powered by an Intel i3 and should handle all the light tasks I run quite effortlessly. Anyways, I continued unpacking and didn't think much more of it. Today, while running a simulation on my laptop, the fan noise reminded me of my earlier observation. I decided to SSH in to my server to check its status.
 </p>
 
 <h2>The Kinsing malware</h2>
 <p>
-To my surprise, when running <code>htop</code>, I saw two processes running at 100% CPU utilization named <em>kdevtmpfsi</em>. Upon reading the first couple of search results, I was baffeled. I had fallen victim for a known malware called Kinsing, which was most likely running crypto mining activities on full blast on two cores on my server. This had been going on for 400 hours+ according to htop. 
+To my surprise, when running <code>htop</code>, I saw two processes running at 100% CPU utilization named <b>kdevtmpfsi</b>. Reading the first couple of search results left me baffeled - I had fallen victim for a known malware called <i>Kinsing</i>. It was most likely running crypto-mining activities on full blast on two cores on my server. According to <code>htop</code>, this had been going on for over 8 days. 
 </p>
 
 <img src="../img/posts/2025-01-04-Home-Server-Security/resource-usage.png" alt="Screenshot of htop showing resource usage" class="center">
 
 <p>
-I quickly searched what might have been the cause of this, and found that there seems to be an exploit for unprotected and exposed docker containers. This was somewhat releiving, as the latest change I had done, was to spin up a <em>postgres_alpine</em> container in Docker right before the holidays to have it available for some personal project while away. This database was then exposed to the internet, with open ports in the router firewall and everything. None of the database guides I followed had warned me about the dangers of exposing a docker containerized database to the internet. Ofcourse I password protected it, but seeing as it was not going to be permanent, I didn't dive further into how to secure it.
+I quickly investigated the potential cause and found that there is an exploit targeting unprotected and exposed Docker containers (<a href="https://sysdig.com/blog/cloud-defense-in-depth/">source</a>). This was somewhat releiving, as the latest change I made was spinning up a <i>postgres_alpine</i> container in Docker right before the holidays. Spinning it up was done in a hurry, as I wanted to have it available remotely for a personal project while I was away from home. This also meant that it was exposed to the internet, with open ports in the router firewall and everything. Considering the process had been running for 8 days, this means that the infection occured just a day after creating the database. None of the database guides I followed had warned me about the dangers of exposing a docker containerized database to the internet. Ofcourse I password protected it, but seeing as it was meant to be temporary, I didn't dive into securing it properly.
 </p>
 
 <p>
-Anyways, despite the scary log entries showing that it had been trying to change privileges and delete what is often critical folders on a system, it was all contained within the container. And luckily for me, the <em>kdevtmpfsi</em> processes were killed when I stopped the <em>postgres_alpine</em> container. 
+Fortunately, despite the scary log entries showing attempts to change privileges and delete critical folders, it seemed that all the malicious activity was contained within the container. And luckily for me, the <b>kdevtmpfsi</b> processes were terminated when I stopped the <i>postgres_alpine</i> container. 
 </p>
 
 <img src="../img/posts/2025-01-04-Home-Server-Security/container-log.png" alt="Screenshot of postgres_alpine docker logs" class="center">
 
-<h2>Further minimization of the attack surface</h2>
+<h2>Minimizing the Attack Surface</h2>
 <p>
-However, when checking my system logs, I found that someone has been trying to brute force their way into my server. A quick IP search reveal that the IP is from the Russian Federation. Although I believe it wasn't an immediate threat, I decided to close access to my home network both for VPN and SSH connections to my server which I had opened earlier for ease of access to my powerful desktop computer and server configuration. This results in no ports being open on my home network anymore, and I also checked my UPnP and DMZ settings to make sure that nothing was open too.
+However, while reviewing my system logs, I discovered that someone was constantly trying to brute force their way into my server. A quick IP search revealed that it was registed with a Chinese ISP and located in the Russian Federation. Although I believe it wasn't an immediate threat, I decided to close access to my home network both for VPN and SSH connections to my server. After checking my UPnP and DMZ settings, this results in no ports being open on my home network anymore.
 </p>
 
 <p>
-With this, I hope to rest more easily. But to those of you who have not had this seanse yet: Be careful with exposing your home setup to the internet! I am at least absolutely sure that I will make sure that the next time I expose something to the internet, I am sure that it is as safe as can be.
+With this, the attach surface of my home network should be limited to exploits against my router firewall, and thus minimized as best as can be. This leaves the problem of me not being able to VPN into my LAN to run simulations on my desktop from the outside, so I might reinvestigate to re-open that at some point. For now, I hope to rest more easily. 
 </p>
+
+<h2>Lessons Learned</h2>
+<p>
+For those of you who have not had this seanse yet: <b>Be careful with exposing your home setup to the internet!</b> I have learned my lesson, and next time I want to expose something to the internet, I will make sure to take the necessary precautions.
+</p>
+
+<p>Happy New Year!</p>
