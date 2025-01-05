@@ -5,7 +5,7 @@ import pytz
 from bs4 import BeautifulSoup
 
 TZ = pytz.timezone("Europe/Oslo")
-DOMAIN = "https://raniseth.com"
+DOMAIN = "https://raniseth.com/"
 BLOG_PATH = "blog"
 ATOM_FILE = "atom.xml"
 
@@ -14,7 +14,7 @@ fg = FeedGenerator()
 fg.id(DOMAIN)
 fg.title('Raniseth')
 fg.author( {'name':'Amund Raniseth'} )
-fg.link( href=DOMAIN + "/" + ATOM_FILE, rel='self' )
+fg.link( href=DOMAIN + ATOM_FILE, rel='self' )
 fg.link( href=DOMAIN, rel='alternate' )
 
 # Find all blogposts
@@ -38,7 +38,7 @@ for bp in blogposts:
     author = soup.find('meta', attrs={'name': 'author'})
     author_content = author['content']
 
-    link = DOMAIN + "/" + BLOG_PATH + "/" + bp 
+    link = DOMAIN + BLOG_PATH + "/" + bp 
 
     fe = fg.add_entry()
     fe.id(link)
