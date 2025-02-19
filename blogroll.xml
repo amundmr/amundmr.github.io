@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="opml.xsl"?>
+<opml version="2.0">
+  <head>
+    <title>Amund Raniseth's blogroll</title>
+  </head>
+  <body>
+    <outline text="TU" xmlUrl="https://www.tu.no/feeds/general.xml" type="rss"
+      htmlUrl="https://www.tu.no/" description="" />
+    <outline text="Digi" xmlUrl="https://www.digi.no/rss" type="rss"
+      htmlUrl="https://www.digi.no" description="" />
+    <outline text="Home Assistant" xmlUrl="https://www.home-assistant.io/atom.xml" type="rss"
+      htmlUrl="https://www.home-assistant.io/blog" description="" />
+    <outline text="Knut Magnus Aasrud" xmlUrl="https://kmaasrud.com/atom.xml" type="rss"
+      htmlUrl="https://www.kmaasrud.com/" description="Magnus Aasrud's personlige blog" />
+    <outline text="Eirik Johannes Husom" xmlUrl="https://erikjohannes.no/index.xml" type="rss"
+      htmlUrl="https://erikjohannes.no" description="Eirik Johannes Husom's personlige side" />
+    <outline text="Energy Storage News" xmlUrl="https://www.energy-storage.news/feed/" type="rss"
+      htmlUrl="https://www.energy-storage.news/" description="" />
+    <outline text="Nature" xmlUrl="https://www.nature.com/nature.rss" type="rss"
+      htmlUrl="https://www.nature.com/nature" description="Nature journal" />
+    <!-- more outline elements with feeds... -->
+  </body>
+</opml>
