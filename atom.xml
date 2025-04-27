@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://raniseth.com/</id>
   <title>Raniseth</title>
-  <updated>2025-01-05T10:15:49.570685+00:00</updated>
+  <updated>2025-04-26T18:29:50.888885+00:00</updated>
   <author>
     <name>Amund Raniseth</name>
   </author>
@@ -10,9 +10,19 @@
   <link href="https://raniseth.com/" rel="alternate"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
   <entry>
+    <id>https://raniseth.com/blog/2025-04-26-Drying-Filament.html</id>
+    <title>Amund's oven-dryed filament</title>
+    <updated>2025-04-26T18:29:50.900744+00:00</updated>
+    <author>
+      <name>Amund Raniseth</name>
+    </author>
+    <link href="https://raniseth.com/blog/2025-04-26-Drying-Filament.html"/>
+    <published>2025-04-26T00:00:00+02:00</published>
+  </entry>
+  <entry>
     <id>https://raniseth.com/blog/2025-01-04-Home-Server-Security.html</id>
     <title>Amund's note on home server security</title>
-    <updated>2025-01-05T10:15:49.580322+00:00</updated>
+    <updated>2025-04-26T18:29:50.898961+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
@@ -22,7 +32,7 @@
   <entry>
     <id>https://raniseth.com/blog/2024-10-15-eBike-lights.html</id>
     <title>Amund's eBike lights</title>
-    <updated>2025-01-05T10:15:49.579455+00:00</updated>
+    <updated>2025-04-26T18:29:50.898126+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
@@ -32,7 +42,7 @@
   <entry>
     <id>https://raniseth.com/blog/2021-01-15-Power-Headlamp.html</id>
     <title>Amund's Power Headlamp</title>
-    <updated>2025-01-05T10:15:49.578469+00:00</updated>
+    <updated>2025-04-26T18:29:50.897101+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
@@ -42,7 +52,7 @@
   <entry>
     <id>https://raniseth.com/blog/2019-09-25-Small-Projects.html</id>
     <title>Amund's Small Projects</title>
-    <updated>2025-01-05T10:15:49.577023+00:00</updated>
+    <updated>2025-04-26T18:29:50.895837+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
@@ -52,7 +62,7 @@
   <entry>
     <id>https://raniseth.com/blog/2019-09-25-Electric-MountainBoard.html</id>
     <title>Amund's Electric MountainBoard</title>
-    <updated>2025-01-05T10:15:49.575993+00:00</updated>
+    <updated>2025-04-26T18:29:50.894449+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
@@ -62,7 +72,7 @@
   <entry>
     <id>https://raniseth.com/blog/2018-04-23-Smart-Mirror.html</id>
     <title>Amund's Smart Mirror</title>
-    <updated>2025-01-05T10:15:49.572771+00:00</updated>
+    <updated>2025-04-26T18:29:50.891150+00:00</updated>
     <author>
       <name>Amund Raniseth</name>
     </author>
