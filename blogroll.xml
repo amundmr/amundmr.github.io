@@ -19,6 +19,8 @@
       htmlUrl="https://www.energy-storage.news/" description="" />
     <outline text="Nature" xmlUrl="https://www.nature.com/nature.rss" type="rss"
       htmlUrl="https://www.nature.com/nature" description="Nature journal" />
+    <outline text="D. Vikan" xmlUrl="https://dvikan.no/feed.xml" type="rss"
+      htmlUrl="https://dvikan.no/" description="D. Vikan's blog" />
     <!-- more outline elements with feeds... -->
   </body>
 </opml>
