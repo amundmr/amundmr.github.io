@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Amund Raniseth">
+<title>Amund's eBike lights</title>
+<link rel="stylesheet" href="../style.css">
+
+
+<h1>eBike lights</h1>
+<hr>
+<sup><em>2024-10-15</em></sup>
+
+<p>
+It's getting darker, and lights on the bike is getting mandatory. Last winter, I was getting quite tired of having to charge and turn on and off three individual things (front light, back light and eBike itself) every time. But now I had the time to do something about it. And with the 3D printer I bought this summer, I was eager to make something!
+</p>
+<p>
+I could have gone overboard and made it smart and connected and whatnot, but this time I decided to keep it simple, and hopefully, reliability would come free. The design ended up becoming 12V LEDs in the front in parallel with red 12V leds in the back, connected to the eBike battery through a switch and a DC-DC buck converter. Luckily, I had everything laying around, and could get everything done in just a weekend of work!
+</p>
+
+<h2>Parts & tools</h2>
+
+<ul>
+    <li>4x 3V white LEDs (for the front)</li>
+    <li>2x 12V red COB LEDs (for the back)</li>
+    <li>1x 50V DC-DC buck converter</li>
+    <li>Flip switch, 12V, 2A</li>
+    <li>3m old speaker wire</li>
+    <li>PLA for 3D printing</li>
+    <li>Zip ties</li>
+    <li>Super glue</li>
+    <li>Hot glue</li>
+    <li>Solder</li>
+</ul>
+
+<ul>
+    <li>Soldering iron</li>
+    <li>3D printer</li>
+    <li>Hot glue gun</li>
+    <li>Scissors</li>
+    <li>Wire clippers</li>
+    <li>Screw driver with various PH & PZ bits</li>
+</ul>
+
+<h2>Design & manufacturing</h2>
+
+<p>
+The electricals were quite simple, following the wiring diagram below.
+</p>
+
+<img src="../img/posts/2024-10-15-eBike-lights/Schematic.png" alt="Wiring diagram" width=100%>
+
+<p>
+Then I needed mounts. I figured since I'd be running the LEDs at significantly lower power than rated, they wouldn't need any cooling. So I simply made some brackets which I could glue them to. These would easily zip-tie to the handlebar and the seat post.
+</p>
+
+<img src="../img/posts/2024-10-15-eBike-lights/3d-front.PNG" alt="" width="50%" /><img src="../img/posts/2024-10-15-eBike-lights/3d-rear.PNG" alt="" width="50%" />
+
+<p>
+For the electrical box, I modeled a simple design with a self locking lid, trying to make it a bit difficult for water to get in. The switch was placed on top for easy access, and also possibly to save it some water exposure since it will be underneath the top frame tube.
+</p>
+
+<img src="../img/posts/2024-10-15-eBike-lights/3d-box.PNG" alt="Render of 3D models" width=100%>
+
+<p>
+Now, the LEDs were soldered and glued to the mounts. The rear LED's were also screwed on, as they had convenient holes for it already. After the picture below was taken, all the exposed electricals were also covered fully in hot glue to hopefully give it some corrosion resistance.
+</p>
+
+<img src="../img/posts/2024-10-15-eBike-lights/assemblies.jpg" alt="LEDs attached to mounts and electro-box" width=100%>
+
+<p>
+When this was done, it was just a matter of soldering to the battery wires in the connector of the frame, and zip-tieing the whole thing together! And yes, it does look very DIY! However, functionality is on point. 👌
+</p>
+
+<img src="../img/posts/2024-10-15-eBike-lights/bike.jpg" alt="The bike is ready for winter!" width=100%>
