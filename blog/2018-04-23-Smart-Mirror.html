@@ -39,26 +39,26 @@
 
 <p>Then I poked some holes in the board which was going to hold the panels, so that I could stick some screews through and glue them on. That would help support the weight of the panels as i figured glue doesn’t easily stick to this surface. I then proceeded to glue the panels directly on to the board after making some scratches in it for the glue to stick to.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/1.jpg" alt="" width="100%" />
-<img src="../img/posts/2019-09-25-Smart-Mirror/2.jpg" alt="" width="100%" />
-<img src="../img/posts/2019-09-25-Smart-Mirror/3.jpg" alt="" width="100%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/1.jpg" alt="" class="center" />
+<img src="../img/posts/2018-04-23-Smart-Mirror/2.jpg" alt="" class="center" />
+<img src="../img/posts/2018-04-23-Smart-Mirror/3.jpg" alt="" class="center" /></p>
 
 <p>When this was done I started working on the mount for the laptop on the back of the plate. There was already two hangers on the back, so I just stuck two pieces of patent band on it to hold the pc temporarily while I got everything set up.</p>
 
 <p>I also taped on the VGA to LVDS controller so I could test both screens. Lastly I taped the webcam and microphone from the laptop to the holes I drilled in the plate. This can be used for facial recognition and voice control later on.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/4.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/5.jpg" alt="" width="50%" />
-<img src="../img/posts/2019-09-25-Smart-Mirror/6.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/7.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/4.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/5.jpg" alt="" width="50%" />
+<img src="../img/posts/2018-04-23-Smart-Mirror/6.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/7.jpg" alt="" width="50%" /></p>
 
 <p>Notice how the cables which were originally going to the screen now exits the hole where the screen hinge would be.</p>
 
 <p>Lets get to the actual mirror part of the project. I could write 500 words on why chosing a film like this wasn’t the greatest idea but I’ll let you see for yourself.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/8.jpg" alt="" width="100%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/8.jpg" alt="" class="center" /></p>
 
 <p>Don’t see the problem? Look at these two pictures:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/9.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/90.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/9.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/90.jpg" alt="" width="50%" /></p>
 
 <p>Ok, so I could have been better at applying the film, but this was my second try and I still didn’t get it. If you look closely you also see that the colors look a bit weird. And even if you are a master at applying films like these, you will probably struggle if you were to order one cheaply on eBay. Both the films I ordered were shipped in just a plastic bag, even though i explicitly asked for a sturdy packaging the second time. This means that the roll have been crumbled under all the other mail during shipping, so the film as a lot of small marks which you just cant remove. Guess I just have bad luck. But there’s more, follow on and I will show you later in the build log.</p>
 
@@ -70,21 +70,21 @@
 
 <p>I opened the laptop and unscrewed and pulled out the power connector. Then I soldered two wires on to the ground, and live wires. I used a multimeter to figure out which was which. I also soldered two wires to the back of the LVDS. It looked something like this:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/91.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/92.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/91.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/92.jpg" alt="" width="50%" /></p>
 
 <p>Excuse my horrible soldering. To my defence I slabbed alot of hotglue on there to isolate the wires better.</p>
 
 <p>The next step was to solder these two pieces on to the buck converter.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/93.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/94.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/93.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/94.jpg" alt="" width="50%" /></p>
 
 <p>After this I glued the laptop connector back in the laptop and plugged it into the motherboard again. I just let the cables hang out of the laptop as shown in the picture below.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/95.jpg" alt="" width="100%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/95.jpg" alt="" class="center" /></p>
 
 <p>After this, its technically done! You just have to glue all the parts to the back of the mirror to make them stick. It would look something like this:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/96.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/97.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/96.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/97.jpg" alt="" width="50%" /></p>
 
 <h1 id="software">Software</h1>
 
@@ -96,21 +96,21 @@
 
 <p>Next is the configuring of this Mirror. I used MagicMirror2 by Michael Teeuw which is an excellent software for this use. It is made for raspbian but as long as you get node.js and electron correctly configured (by googling online) you should get it to work just fine. How to install MagicMirror2, you can find here. Please use google to figure out the rest. One thing I will tell you to save you some hassle: You will have to run two separate MagicMirror instances since it can not expand over two displays(at least I couldn’t get it working). The best way is to have two installations of MagicMirror in two different folders and edit the code of the MagicMirror/js/electron.js so that it offsets the screen the same amount of pixles as your left monitor is wide. Do this under the function createWindow, and the x: value is the offset. It will look something like this:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/98.jpg" alt="" width="100%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/98.jpg" alt="" class="center" /></p>
 
 <p>Some other good advices is to use ARandR to rotate the displays correctly, and use TeamViewer to remote control your mirror, I found this very easy to do.</p>
 
 <p>Here is where to find ARandR:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/99.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/990.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/99.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/990.jpg" alt="" width="50%" /></p>
 
 <p>And here is the glorius masterpiece up and running with a couple of different modules:</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/991.jpg" alt="" width="100%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/991.jpg" alt="" class="center" /></p>
 
 <p>Here are some more closeups, sorry for the bad camera.</p>
 
-<p><img src="../img/posts/2019-09-25-Smart-Mirror/992.jpg" alt="" width="50%" /><img src="../img/posts/2019-09-25-Smart-Mirror/993.jpg" alt="" width="50%" /></p>
+<p><img src="../img/posts/2018-04-23-Smart-Mirror/992.jpg" alt="" width="50%" /><img src="../img/posts/2018-04-23-Smart-Mirror/993.jpg" alt="" width="50%" /></p>
 
 <p>Now as you can see, the screens shine trough the film alot. This is mostly because of bad screens, but a better mirror would help too. Its hard to see but the plastic plate with the mirror film also bends a little, so the reflection gets bent around, and that doesn’t make a nice mirror. However, for a budget around $40, I think this was a decent project, and I learned alot along the way.</p>
 
