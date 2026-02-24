@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q-Kode Master - Radioamatør Trener</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --success: #2ecc71;
+            --error: #e74c3c;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Navigasjon */
+        nav {
+            background: var(--primary);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav button.active {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        #main-container {
+            width: 90%;
+            max-width: 600px;
+            margin-top: 30px;
+        }
+
+        /* Trenings-kort */
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .q-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+            padding: 20px;
+            border: 4px dashed var(--accent);
+            border-radius: 10px;
+            background: #f9fbff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .btn-opt {
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .btn-opt:hover {
+            border-color: var(--accent);
+            background: #f0f8ff;
+        }
+
+        .correct { background-color: var(--success) !important; color: white; }
+        .wrong { background-color: var(--error) !important; color: white; }
+
+        /* Oversikt Tabell */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th { background: var(--accent); color: white; }
+        tr:hover { background: #f1f1f1; }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 7px;
+            border-radius: 10px;
+            background: #e0e0e0;
+            color: #666;
+        }
+
+        .badge.pensum {
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .settings-bar {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <button id="nav-train" class="active" onclick="showView('train')">Trening</button>
+    <button id="nav-list" onclick="showView('list')">Oversikt</button>
+</nav>
+
+<div id="main-container">
+    
+    <div id="view-train">
+        <div class="settings-bar">
+            <span>Modus:</span>
+            <select id="mode-select" onchange="resetGame()">
+                <option value="pensum">Lisens-pensum (Viktigste)</option>
+                <option value="alle">Alle Q-koder</option>
+            </select>
+        </div>
+
+        <div class="card">
+            <div class="stats">
+                <span>Poeng: <span id="score">0</span></span>
+                <span>Streak: <span id="streak">0</span> 🔥</span>
+            </div>
+            
+            <div class="q-display" id="q-code">...</div>
+
+            <div class="options-grid" id="options"></div>
+            <div id="feedback" style="margin-top:15px; font-weight:bold; height:20px;"></div>
+        </div>
+    </div>
+
+    <div id="view-list" class="hidden">
+        <div class="card">
+            <h3>Alle Q-koder</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Betydning</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="full-list-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const qData = [
+        { code: "QTH", answer: "Hva er din posisjon?", isCore: true },
+        { code: "QSL", answer: "Kan du bekrefte mottak?", isCore: true },
+        { code: "QRZ", answer: "Hvem kaller meg?", isCore: true },
+        { code: "QSO", answer: "Kan du kommunisere direkte?", isCore: true },
+        { code: "QRT", answer: "Skal jeg avslutte sendingen?", isCore: true },
+        { code: "QSY", answer: "Skal jeg bytte frekvens?", isCore: true },
+        { code: "QRM", answer: "Er du forstyrret av andre stasjoner?", isCore: true },
+        { code: "QRN", answer: "Er du forstyrret av atmosfærisk støy?", isCore: true },
+        { code: "QRP", answer: "Skal jeg redusere effekten?", isCore: true },
+        { code: "QRO", answer: "Skal jeg øke effekten?", isCore: true },
+        { code: "QRV", answer: "Er du klar?", isCore: true },
+        { code: "QRL", answer: "Er frekvensen opptatt?", isCore: true },
+        { code: "QSB", answer: "Varierer signalstyrken min (fading)?", isCore: true },
+        { code: "QRX", answer: "Når vil du kalle meg igjen?", isCore: false },
+        { code: "QRG", answer: "Vil du fortelle meg min nøyaktige frekvens?", isCore: false },
+        { code: "QRA", answer: "Hva er navnet på stasjonen din?", isCore: false },
+        { code: "QRK", answer: "Hva er lesbarheten av signalene mine?", isCore: false },
+        { code: "QRS", answer: "Skal jeg sende saktere?", isCore: false },
+        { code: "QRU", answer: "Har du noe mer til meg?", isCore: false },
+        { code: "QRW", answer: "Skal jeg informere X om at du kaller?", isCore: false },
+        { code: "QSA", answer: "Hva er min signalstyrke?", isCore: false },
+        { code: "QSD", answer: "Er min manipulering (tasting) defekt?", isCore: false },
+        { code: "QSP", answer: "Vil du viderekoble til...?", isCore: false },
+        { code: "QTR", answer: "Hva er nøyaktig klokkeslett?", isCore: false }
+    ];
+
+    let score = 0;
+    let streak = 0;
+    let currentCode = {};
+    let currentPool = [];
+
+    function showView(view) {
+        document.getElementById('view-train').classList.toggle('hidden', view !== 'train');
+        document.getElementById('view-list').classList.toggle('hidden', view !== 'list');
+        document.getElementById('nav-train').classList.toggle('active', view === 'train');
+        document.getElementById('nav-list').classList.toggle('active', view === 'list');
+        
+        if(view === 'list') renderTable();
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('full-list-body');
+        tbody.innerHTML = '';
+        qData.sort((a,b) => a.code.localeCompare(b.code)).forEach(item => {
+            const row = `<tr>
+                <td><strong>${item.code}</strong></td>
+                <td>${item.answer}</td>
+                <td><span class="badge ${item.isCore ? 'pensum' : ''}">${item.isCore ? 'PENSUM' : 'EKSTRA'}</span></td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    function resetGame() {
+        score = 0;
+        streak = 0;
+        updateStats();
+        const mode = document.getElementById('mode-select').value;
+        currentPool = mode === 'pensum' ? qData.filter(q => q.isCore) : qData;
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        document.getElementById('feedback').innerText = "";
+        currentCode = currentPool[Math.floor(Math.random() * currentPool.length)];
+        document.getElementById('q-code').innerText = currentCode.code;
+
+        let options = [currentCode.answer];
+        // Bruk hele qData for å lage feilsvar slik at det blir vanskeligere
+        while (options.length < 4) {
+            let rand = qData[Math.floor(Math.random() * qData.length)].answer;
+            if (!options.includes(rand)) options.push(rand);
+        }
+        options.sort(() => Math.random() - 0.5);
+
+        const container = document.getElementById('options');
+        container.innerHTML = '';
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-opt';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(opt, btn);
+            container.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selected, btn) {
+        const btns = document.querySelectorAll('.btn-opt');
+        btns.forEach(b => b.disabled = true);
+
+        if (selected === currentCode.answer) {
+            score += 10;
+            streak++;
+            btn.classList.add('correct');
+            document.getElementById('feedback').innerText = "Riktig! 73!";
+            document.getElementById('feedback').style.color = "var(--success)";
+        } else {
+            streak = 0;
+            btn.classList.add('wrong');
+            document.getElementById('feedback').innerText = "Feil svar.";
+            document.getElementById('feedback').style.color = "var(--error)";
+            btns.forEach(b => {
+                if(b.innerText === currentCode.answer) b.classList.add('correct');
+            });
+        }
+        updateStats();
+        setTimeout(nextQuestion, 1800);
+    }
+
+    function updateStats() {
+        document.getElementById('score').innerText = score;
+        document.getElementById('streak').innerText = streak;
+    }
+
+    // Start
+    resetGame();
+</script>
+
+</body>
+</html>

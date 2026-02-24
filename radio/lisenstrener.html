@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amatørradio lisenstrener</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #27ae60;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: var(--accent);
+            width: 0%;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            border-color: var(--accent);
+        }
+
+        .correct {
+            background: #d4edda !important;
+            border-color: #28a745 !important;
+        }
+
+        .wrong {
+            background: #f8d7da !important;
+            border-color: #dc3545 !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #category-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <div id="game-screen">
+            <div style="background: #eee; border-radius: 5px;">
+                <div class="progress-bar" id="progress"></div>
+            </div>
+            <p id="category-tag"></p>
+            <div class="question" id="question-text">Laster database...</div>
+            <div class="options" id="options-container"></div>
+        </div>
+
+        <div id="result-screen" class="hidden" style="text-align: center;">
+            <h1>Eksamen ferdig!</h1>
+            <div id="final-stats" style="font-size: 1.5rem; margin: 20px 0;"></div>
+            <p id="verdict"></p>
+            <button onclick="location.reload()" style="background: var(--primary); color: white; width: 100%;">Ta ny
+                prøve</button>
+        </div>
+    </div>
+
+    <script src="sporsmal.js"></script>
+
+    <script>
+        let activeQuestions = [];
+        let currentIdx = 0;
+        let score = 0;
+
+        function initGame() {
+            // 1. Tømmer listen og henter alt fra databasen
+            activeQuestions = [];
+            for (let cat in questionBank) {
+                questionBank[cat].forEach(q => {
+                    q.category = cat;
+                    activeQuestions.push(q);
+                });
+            }
+
+            // 2. Blander alle spørsmålene tilfeldig
+            activeQuestions.sort(() => Math.random() - 0.5);
+
+            // 3. HER ER FIXEN: Vi beholder bare de første 19 spørsmålene
+            activeQuestions = activeQuestions.slice(0, 19);
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if (currentIdx >= activeQuestions.length) {
+                showResults();
+                return;
+            }
+
+            const q = activeQuestions[currentIdx];
+            document.getElementById("category-tag").innerText = q.category;
+            document.getElementById("question-text").innerText = q.q;
+
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement("button");
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, q.c);
+                container.appendChild(btn);
+            });
+
+            document.getElementById("progress").style.width = `${(currentIdx / activeQuestions.length) * 100}%`;
+        }
+
+        function checkAnswer(choice, correctIdx) {
+            const buttons = document.querySelectorAll("#options-container button");
+
+            if (choice === correctIdx) {
+                buttons[choice].classList.add("correct");
+                score++;
+            } else {
+                buttons[choice].classList.add("wrong");
+                buttons[correctIdx].classList.add("correct");
+            }
+
+            // Deaktiver knapper så man ikke kan trykke flere ganger
+            buttons.forEach(b => b.disabled = true);
+
+            setTimeout(() => {
+                currentIdx++;
+                loadQuestion();
+            }, 1200);
+        }
+
+        function showResults() {
+            document.getElementById("game-screen").classList.add("hidden");
+            document.getElementById("result-screen").classList.remove("hidden");
+
+            const percent = (score / activeQuestions.length) * 100;
+            document.getElementById("final-stats").innerText = `${score} av ${activeQuestions.length} riktige (${percent.toFixed(0)}%)`;
+
+            const verdict = document.getElementById("verdict");
+            if (percent >= 80) {
+                verdict.innerHTML = "<b style='color:green'>BESTÅTT!</b> Du er klar for lisensprøven.";
+            } else {
+                verdict.innerHTML = "<b style='color:red'>IKKE BESTÅTT.</b> Du trenger 80% for å være trygg.";
+            }
+        }
+
+        // Start når siden er lastet
+        window.onload = initGame;
+    </script>
+
+</body>
+
+</html>

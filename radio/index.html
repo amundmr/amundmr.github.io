@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radioamatør Trenerportal</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --fonetisk: #e67e22;
+            --qkode: #2ecc71;
+            --lisens: #9b59b6;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary);
+            width: 100%;
+            padding: 50px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        .tool-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
+            border-top: 8px solid var(--accent);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card.fonetisk {
+            border-top-color: var(--fonetisk);
+        }
+
+        .tool-card.qkode {
+            border-top-color: var(--qkode);
+        }
+
+        .tool-card.lisens {
+            border-top-color: var(--lisens);
+        }
+
+        .icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .tool-card h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.5rem;
+        }
+
+        .tool-card p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            background: var(--primary);
+            color: white;
+            display: inline-block;
+        }
+
+        .tool-card:hover .btn {
+            background: var(--accent);
+        }
+
+        .tool-card.fonetisk:hover .btn {
+            background: var(--fonetisk);
+        }
+
+        .tool-card.qkode:hover .btn {
+            background: var(--qkode);
+        }
+
+        .tool-card.lisens:hover .btn {
+            background: var(--lisens);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 30px 0;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Radioamatør Treningsportal</h1>
+        <p>Av Amund (SWL) og Google Gemini</p>
+    </header>
+
+    <div class="container">
+
+        <a href="fonetisk.html" class="tool-card fonetisk">
+            <div>
+                <div class="icon">🎙️</div>
+                <h2>Fonetisk Alfabet</h2>
+                <p>Mestre NATO-alfabetet uten juksing. Tren på både tegn og kodeord med smarte feilsvar.</p>
+            </div>
+            <div class="btn">Start Trening</div>
+        </a>
+
+        <a href="lisenstrener.html" class="tool-card lisens">
+            <div>
+                <div class="icon">📜</div>
+                <h2>Lisenstrener</h2>
+                <p>Forbered deg til den tekniske og regulatoriske prøven for radioamatørlisens.</p>
+            </div>
+            <div class="btn">Start Trening</div>
+        </a>
+
+        <a href="q-trener.html" class="tool-card qkode">
+            <div>
+                <div class="icon">📡</div>
+                <h2>Q-kode Master</h2>
+                <p>Lær de viktigste Q-kodene.</p>
+            </div>
+            <div class="btn">Start Trening</div>
+        </a>
+
+    </div>
+
+    <footer>
+        Laget av og for aspirerende radioamatører &bull; 73
+    </footer>
+
+</body>
+
+</html>
