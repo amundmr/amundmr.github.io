@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Båndplan Master - Radioamatør</title>
+    <style>
+        :root {
+            --primary: #1a252f;
+            --accent: #f39c12;
+            --success: #27ae60;
+            --error: #c0392b;
+            --bg: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: var(--primary);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav button.active {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        #main-container {
+            width: 95%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .display-box {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+            padding: 20px;
+            border: 4px dashed var(--accent);
+            border-radius: 10px;
+            background: #fffcf9;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-opt {
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-opt:hover {
+            border-color: var(--accent);
+            background: #fffcf9;
+        }
+
+        .correct {
+            background-color: var(--success) !important;
+            color: white;
+            border-color: var(--success);
+        }
+
+        .wrong {
+            background-color: var(--error) !important;
+            color: white;
+            border-color: var(--error);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: var(--accent);
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .small-info {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <button id="nav-train" class="active" onclick="showView('train')">Trening</button>
+        <button id="nav-list" onclick="showView('list')">Båndplan-tabell</button>
+    </nav>
+
+    <div id="main-container">
+        <div id="view-train">
+            <div class="card">
+                <div class="stats">
+                    <span>Poeng: <span id="score">0</span></span>
+                    <span>Streak: <span id="streak">0</span> 🔥</span>
+                </div>
+                <div id="q-type" class="small-info">Hvilket frekvensområde tilhører båndet?</div>
+                <div class="display-box" id="q-main">?</div>
+                <div class="options-grid" id="options"></div>
+                <div id="feedback" style="margin-top:15px; font-weight:bold; height:20px;"></div>
+            </div>
+        </div>
+
+        <div id="view-list" class="hidden">
+            <div class="card">
+                <h3 style="margin-top:0;">Norsk Båndplan (Nkom)</h3>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bånd</th>
+                                <th>Frekvens</th>
+                                <th>Status</th>
+                                <th>Effekt</th>
+                                <th>Båndbredde</th>
+                            </tr>
+                        </thead>
+                        <tbody id="full-list-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bandData = [
+            { name: "2200m", freq: "135,7–137,8 kHz", status: "Sekundær", power: "200W (1W eirp)", bw: "1 kHz" },
+            { name: "630m", freq: "472–479 kHz", status: "Sekundær", power: "100W (1W eirp)", bw: "1 kHz" },
+            { name: "160m", freq: "1810–1850 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "160m (høy)", freq: "1850–2000 kHz", status: "Sekundær", power: "10W", bw: "6 kHz" },
+            { name: "80m", freq: "3500–3800 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "60m", freq: "5260–5410 kHz", status: "Sekundær", power: "100W", bw: "6 kHz" },
+            { name: "40m", freq: "7000–7200 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "30m", freq: "10100–10150 kHz", status: "Sekundær", power: "1000W", bw: "1 kHz" },
+            { name: "20m", freq: "14000–14350 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "17m", freq: "18068–18168 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "15m", freq: "21000–21450 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "12m", freq: "24890–24990 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
+            { name: "10m", freq: "28000–29700 kHz", status: "Primær", power: "1000W", bw: "18 kHz" },
+            { name: "6m", freq: "50–52 MHz", status: "Primær", power: "1000W", bw: "18 kHz" },
+            { name: "4m", freq: "69,9–70,5 MHz", status: "Sekundær", power: "100W", bw: "16 kHz" },
+            { name: "2m", freq: "144–146 MHz", status: "Primær", power: "300W/1000W", bw: "18 kHz" },
+            { name: "70cm", freq: "432–438 MHz", status: "Primær", power: "300W/1000W", bw: "30 kHz" },
+            { name: "23cm", freq: "1240–1300 MHz", status: "Sekundær", power: "100W/1000W", bw: "20 MHz" }
+        ];
+
+        let score = 0;
+        let streak = 0;
+        let currentItem = {};
+        let currentQType = ""; // 'freq', 'status', eller 'meter'
+
+        function showView(view) {
+            document.getElementById('view-train').classList.toggle('hidden', view !== 'train');
+            document.getElementById('view-list').classList.toggle('hidden', view !== 'list');
+            document.getElementById('nav-train').classList.toggle('active', view === 'train');
+            document.getElementById('nav-list').classList.toggle('active', view === 'list');
+            if (view === 'list') renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('full-list-body');
+            tbody.innerHTML = '';
+            bandData.forEach(item => {
+                tbody.innerHTML += `<tr>
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.freq}</td>
+                    <td>${item.status}</td>
+                    <td>${item.power}</td>
+                    <td>${item.bw}</td>
+                </tr>`;
+            });
+        }
+
+        function nextQuestion() {
+            document.getElementById('feedback').innerText = "";
+            currentItem = bandData[Math.floor(Math.random() * bandData.length)];
+
+            // Varier spørsmålstype
+            const types = ['freq', 'status', 'bw'];
+            currentQType = types[Math.floor(Math.random() * types.length)];
+
+            let questionText = "";
+            let correctAnswer = "";
+            let options = [];
+
+            if (currentQType === 'freq') {
+                questionText = `Hvilket frekvensområde har ${currentItem.name}?`;
+                correctAnswer = currentItem.freq;
+                document.getElementById('q-main').innerText = currentItem.name;
+                options = [correctAnswer, ...getRandomFakes('freq', 3)];
+            } else if (currentQType === 'status') {
+                questionText = `Hva er status for ${currentItem.freq}?`;
+                correctAnswer = currentItem.status;
+                document.getElementById('q-main').innerText = currentItem.freq;
+                options = ["Primær", "Sekundær"];
+            } else {
+                questionText = `Maks båndbredde for ${currentItem.name}?`;
+                correctAnswer = currentItem.bw;
+                document.getElementById('q-main').innerText = currentItem.name;
+                options = [correctAnswer, "1 kHz", "6 kHz", "18 kHz", "30 kHz", "20 MHz"].filter((v, i, a) => a.indexOf(v) === i).slice(0, 4);
+                if (!options.includes(correctAnswer)) options[0] = correctAnswer;
+            }
+
+            document.getElementById('q-type').innerText = questionText;
+            options = options.sort(() => Math.random() - 0.5);
+
+            const container = document.getElementById('options');
+            container.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-opt';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(opt, btn, correctAnswer);
+                container.appendChild(btn);
+            });
+        }
+
+        function getRandomFakes(field, count) {
+            return bandData
+                .filter(item => item[field] !== currentItem[field])
+                .map(item => item[field])
+                .sort(() => Math.random() - 0.5)
+                .slice(0, count);
+        }
+
+        function checkAnswer(selected, btn, correct) {
+            const btns = document.querySelectorAll('.btn-opt');
+            btns.forEach(b => b.disabled = true);
+
+            if (selected === correct) {
+                score += 10;
+                streak++;
+                btn.classList.add('correct');
+                document.getElementById('feedback').innerText = "Riktig!";
+                document.getElementById('feedback').style.color = "var(--success)";
+            } else {
+                streak = 0;
+                btn.classList.add('wrong');
+                document.getElementById('feedback').innerText = `Feil, riktig er ${correct}`;
+                document.getElementById('feedback').style.color = "var(--error)";
+                btns.forEach(b => { if (b.innerText === correct) b.classList.add('correct'); });
+            }
+            updateStats();
+            setTimeout(nextQuestion, 2000);
+        }
+
+        function updateStats() {
+            document.getElementById('score').innerText = score;
+            document.getElementById('streak').innerText = streak;
+        }
+
+        nextQuestion();
+    </script>
+</body>
+
+</html>

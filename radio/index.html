@@ -12,6 +12,7 @@
             --fonetisk: #e67e22;
             --qkode: #2ecc71;
             --lisens: #9b59b6;
+            --bandplan: #f39c12;
             --bg: #f4f7f6;
             --white: #ffffff;
         }
@@ -90,6 +91,10 @@
             border-top-color: var(--lisens);
         }
 
+        .tool-card.bandplan {
+            border-top-color: var(--bandplan);
+        }
+
         .icon {
             font-size: 3.5rem;
             margin-bottom: 20px;
@@ -133,6 +138,10 @@
 
         .tool-card.lisens:hover .btn {
             background: var(--lisens);
+        }
+
+        .tool-card.bandplan:hover .btn {
+            background: var(--bandplan);
         }
 
         footer {
@@ -186,6 +195,15 @@
                 <div class="icon">📡</div>
                 <h2>Q-kode Master</h2>
                 <p>Lær de viktigste Q-kodene.</p>
+            </div>
+            <div class="btn">Start Trening</div>
+        </a>
+
+        <a href="bandplaner.html" class="tool-card bandplan">
+            <div>
+                <div class="icon">🗺️</div>
+                <h2>Båndplan Master</h2>
+                <p>Få oversikt over de norske frekvensbåndene, status, og tillatt båndbredde.</p>
             </div>
             <div class="btn">Start Trening</div>
         </a>
