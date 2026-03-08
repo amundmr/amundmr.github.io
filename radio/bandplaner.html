@@ -140,10 +140,34 @@
             display: none;
         }
 
+        .settings-bar {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
         .small-info {
             font-size: 0.9rem;
             color: #666;
             margin-bottom: 10px;
+        }
+
+        /* badge for important bands */
+        .badge {
+            font-size: 0.7rem;
+            padding: 3px 7px;
+            border-radius: 10px;
+            background: #e0e0e0;
+            color: #666;
+            margin-left: 5px;
+        }
+
+        .badge.pensum {
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -157,6 +181,13 @@
 
     <div id="main-container">
         <div id="view-train">
+            <div class="settings-bar">
+                <span>Modus:</span>
+                <select id="mode-select" onchange="resetGame()">
+                    <option value="viktig">Viktige bånd</option>
+                    <option value="alle">Alle bånd</option>
+                </select>
+            </div>
             <div class="card">
                 <div class="stats">
                     <span>Poeng: <span id="score">0</span></span>
@@ -192,30 +223,33 @@
 
     <script>
         const bandData = [
-            { name: "2200m", freq: "135,7–137,8 kHz", status: "Sekundær", power: "200W (1W eirp)", bw: "1 kHz" },
-            { name: "630m", freq: "472–479 kHz", status: "Sekundær", power: "100W (1W eirp)", bw: "1 kHz" },
-            { name: "160m", freq: "1810–1850 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "160m (høy)", freq: "1850–2000 kHz", status: "Sekundær", power: "10W", bw: "6 kHz" },
-            { name: "80m", freq: "3500–3800 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "60m", freq: "5260–5410 kHz", status: "Sekundær", power: "100W", bw: "6 kHz" },
-            { name: "40m", freq: "7000–7200 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "30m", freq: "10100–10150 kHz", status: "Sekundær", power: "1000W", bw: "1 kHz" },
-            { name: "20m", freq: "14000–14350 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "17m", freq: "18068–18168 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "15m", freq: "21000–21450 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "12m", freq: "24890–24990 kHz", status: "Primær", power: "1000W", bw: "6 kHz" },
-            { name: "10m", freq: "28000–29700 kHz", status: "Primær", power: "1000W", bw: "18 kHz" },
-            { name: "6m", freq: "50–52 MHz", status: "Primær", power: "1000W", bw: "18 kHz" },
-            { name: "4m", freq: "69,9–70,5 MHz", status: "Sekundær", power: "100W", bw: "16 kHz" },
-            { name: "2m", freq: "144–146 MHz", status: "Primær", power: "300W/1000W", bw: "18 kHz" },
-            { name: "70cm", freq: "432–438 MHz", status: "Primær", power: "300W/1000W", bw: "30 kHz" },
-            { name: "23cm", freq: "1240–1300 MHz", status: "Sekundær", power: "100W/1000W", bw: "20 MHz" }
+            { name: "2200m", freq: "135,7–137,8 kHz", status: "Sekundær", power: "200W (1W eirp)", bw: "1 kHz", isCore: false },
+            { name: "630m", freq: "472–479 kHz", status: "Sekundær", power: "100W (1W eirp)", bw: "1 kHz", isCore: false },
+            { name: "160m", freq: "1810–1850 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: false },
+            { name: "160m (høy)", freq: "1850–2000 kHz", status: "Sekundær", power: "10W", bw: "6 kHz", isCore: false },
+            { name: "80m", freq: "3500–3800 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: true },
+            { name: "60m", freq: "5260–5410 kHz", status: "Sekundær", power: "100W", bw: "6 kHz", isCore: true },
+            { name: "40m", freq: "7000–7200 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: true },
+            { name: "30m", freq: "10100–10150 kHz", status: "Sekundær", power: "1000W", bw: "1 kHz", isCore: true },
+            { name: "20m", freq: "14000–14350 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: true },
+            { name: "17m", freq: "18068–18168 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: false },
+            { name: "15m", freq: "21000–21450 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: false },
+            { name: "12m", freq: "24890–24990 kHz", status: "Primær", power: "1000W", bw: "6 kHz", isCore: false },
+            { name: "10m", freq: "28000–29700 kHz", status: "Primær", power: "1000W", bw: "18 kHz", isCore: true },
+            { name: "6m", freq: "50–52 MHz", status: "Primær", power: "1000W", bw: "18 kHz", isCore: false },
+            { name: "4m", freq: "69,9–70,5 MHz", status: "Sekundær", power: "100W", bw: "16 kHz", isCore: false },
+            { name: "2m", freq: "144–146 MHz", status: "Primær", power: "300W/1000W", bw: "18 kHz", isCore: true },
+            { name: "70cm", freq: "432–438 MHz", status: "Primær", power: "300W/1000W", bw: "30 kHz", isCore: true },
+            { name: "23cm", freq: "1240–1300 MHz", status: "Sekundær", power: "100W/1000W", bw: "20 MHz", isCore: false }
         ];
 
         let score = 0;
         let streak = 0;
         let currentItem = {};
-        let currentQType = ""; // 'freq', 'status', eller 'meter'
+        let currentQType = ""; // 'freq', 'status', eller 'bw'
+
+        // keep track of mode so we can restrict which question types are asked
+
 
         function showView(view) {
             document.getElementById('view-train').classList.toggle('hidden', view !== 'train');
@@ -230,7 +264,7 @@
             tbody.innerHTML = '';
             bandData.forEach(item => {
                 tbody.innerHTML += `<tr>
-                    <td><strong>${item.name}</strong></td>
+                    <td><strong>${item.name}</strong>${item.isCore ? '<span class="badge pensum">VIKTIG</span>' : ''}</td>
                     <td>${item.freq}</td>
                     <td>${item.status}</td>
                     <td>${item.power}</td>
@@ -239,11 +273,15 @@
             });
         }
 
+        let currentPool = bandData; // will be filtered in resetGame
+
         function nextQuestion() {
             document.getElementById('feedback').innerText = "";
-            currentItem = bandData[Math.floor(Math.random() * bandData.length)];
 
-            // Varier spørsmålstype
+            // velg tilfeldig element fra pool som allerede er filtrert etter modus
+            currentItem = currentPool[Math.floor(Math.random() * currentPool.length)];
+
+            // alle tre spørsmålstyper er i spill, men poolen kan være mindre
             const types = ['freq', 'status', 'bw'];
             currentQType = types[Math.floor(Math.random() * types.length)];
 
@@ -284,7 +322,8 @@
         }
 
         function getRandomFakes(field, count) {
-            return bandData
+            // when training on viktige bånd, only use those bands for wrong answers as well
+            return currentPool
                 .filter(item => item[field] !== currentItem[field])
                 .map(item => item[field])
                 .sort(() => Math.random() - 0.5)
@@ -317,7 +356,19 @@
             document.getElementById('streak').innerText = streak;
         }
 
-        nextQuestion();
+        // start spillet gjennom en reset slik at poeng og streak også nullstilles ved valg av modus
+        resetGame();
+
+        function resetGame() {
+            score = 0;
+            streak = 0;
+            updateStats();
+
+            const mode = document.getElementById('mode-select')?.value || 'alle';
+            currentPool = mode === 'viktig' ? bandData.filter(b => b.isCore) : bandData;
+
+            nextQuestion();
+        }
     </script>
 </body>
 
