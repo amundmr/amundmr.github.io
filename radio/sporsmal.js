@@ -56,7 +56,7 @@ const questionBank = {
         { q: "Hvem har ansvaret for at stasjonen ikke sender utstyr utenfor amatørbåndene?", a: ["Nkom", "NRRL", "Lisensinnehaveren", "Produsenten av radioen"], c: 2 },
         { q: "Kan du bruke amatørradio til kommersiell virksomhet?", a: ["Ja", "Nei", "Bare på søndager", "Bare hvis du betaler ekstra skatt"], c: 1 },
         { q: "Hva betyr 'QRM'?", a: ["Jeg har støy fra atmosfæren", "Jeg blir forstyrret av andre stasjoner", "Jeg flytter frekvens", "Været er dårlig"], c: 1 },
-        { q: "Hva er kravet for kallesignal ved bruk av bærbar stasjon (portable)?", a: ["Legg til /P etter kallesignalet", "Legg til /M etter kallesignalet", "Bruk et helt nytt navn", "Ingen endring nødvendig"], c: 0 },
+        { q: "Hva er kravet for kallesignal ved bruk av bærbar stasjon (portable)?", a: ["Legg til /P etter kallesignalet", "Legg til /M etter kallesignalet", "Bruk et helt nytt navn", "Ingen endring nødvendig"], c: 3 },
         { q: "Hva er 'IARU Region 1'?", a: ["Nord- og Sør-Amerika", "Europa, Afrika og Nord-Asia", "Oseania", "Sør-Asia"], c: 1 },
         { q: "Hva er lovlig bruk av amatørradio i nødssituasjoner?", a: ["Bruke alle tilgjengelige midler for å få kontakt", "Bare bruke 145.500 MHz", "Vente på tillatelse fra politiet", "Bare sende i morse"], c: 0 },
         { q: "Hvor lang er gyldigheten til en norsk radioamatørlisens?", a: ["5 år", "10 år", "Livsvarig (inntil den blir slettet/sagt opp)", "1 år"], c: 2 }
