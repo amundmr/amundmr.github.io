@@ -34,6 +34,21 @@
             padding: 10px 0;
             gap: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        nav a.home {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
 
         nav button {
@@ -103,9 +118,11 @@
             text-align: left;
         }
 
-        .btn-opt:hover {
-            border-color: var(--accent);
-            background: #f0f8ff;
+        @media (hover: hover) {
+            .btn-opt:hover {
+                border-color: var(--accent);
+                background: #f0f8ff;
+            }
         }
 
         .correct {
@@ -140,8 +157,10 @@
             color: white;
         }
 
-        tr:hover {
-            background: #f1f1f1;
+        @media (hover: hover) {
+            tr:hover {
+                background: #f1f1f1;
+            }
         }
 
         .badge {
@@ -175,6 +194,7 @@
 <body>
 
     <nav>
+        <a href="index.html" class="home">← Hjem</a>
         <button id="nav-train" class="active" onclick="showView('train')">Trening</button>
         <button id="nav-list" onclick="showView('list')">Oversikt</button>
     </nav>

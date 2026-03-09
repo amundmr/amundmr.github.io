@@ -18,8 +18,32 @@
             background: var(--bg);
             color: var(--text);
             display: flex;
-            justify-content: center;
-            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        nav {
+            background: var(--primary);
+            width: 100%;
+            display: flex;
+            padding: 10px 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        nav a.home {
+            color: white;
+            text-decoration: none;
+            border: 2px solid white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .card {
+            margin: 20px;
         }
 
         .card {
@@ -61,8 +85,10 @@
             font-size: 1rem;
         }
 
-        button:hover {
-            border-color: var(--accent);
+        @media (hover: hover) {
+            button:hover {
+                border-color: var(--accent);
+            }
         }
 
         .correct {
@@ -89,6 +115,10 @@
 </head>
 
 <body>
+
+    <nav>
+        <a href="index.html" class="home">← Hjem</a>
+    </nav>
 
     <div class="card">
         <div id="game-screen">
