@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRZ Callsign Lookup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-box {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        #searchInput {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #searchButton:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .bio-iframe {
+            width: 100%;
+            min-height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .awards-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+        }
+
+        .awards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .award-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            flex: 1 1 200px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Enter Callsign (e.g., FO5GJ)" />
+            <button id="searchButton">Search</button>
+        </div>
+
+        <div id="results">
+            <p style="text-align: center; color: #666;">Enter a callsign and click Search to fetch data.</p>
+        </div>
+    </div>
+
+    <script>
+        // Proper UTF-8 Base64 decoder
+        function utf8DecodeBase64(str) {
+            return decodeURIComponent(escape(atob(str)));
+        }
+
+        // Function to convert data-src to src for all images
+        function convertLazyImagesToRegular(html) {
+            return html.replace(/<img([^>]*)data-src="([^"]*)"([^>]*)>/g, function (match, p1, p2, p3) {
+                return `<img${p1}src="${p2}"${p3}`;
+            });
+        }
+
+        document.getElementById('searchButton').addEventListener('click', fetchCallsignData);
+
+        function fetchCallsignData() {
+            const callsign = document.getElementById('searchInput').value.trim();
+            if (!callsign) {
+                alert('Please enter a callsign.');
+                return;
+            }
+
+            const upperCallsign = callsign.toUpperCase();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p style="text-align: center;">Loading data for ' + upperCallsign + '...</p>';
+
+            fetch(`https://cors-anywhere.herokuapp.com/https://www.qrz.com/db/${upperCallsign}`, {
+                headers: {
+                    'Accept': 'text/html',
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+
+                    const upperCallsign = doc.querySelector('.csignm')?.textContent || callsign.toUpperCase();
+                    const countryElement = doc.querySelector('.cland');
+                    const imageElement = doc.querySelector('#mypic');
+                    const awardsElement = doc.querySelector('#t_awards');
+
+                    // Extract awards HTML if available
+                    let awardsHTML = '';
+                    if (awardsElement) {
+                        awardsElement.querySelectorAll('.award-banner').forEach(award => {
+                            awardsHTML += award.outerHTML;
+                        });
+                    }
+
+                    let resultsHTML = `
+                    <h2 style="text-align: center;">${upperCallsign}</h2>
+                    <div style="text-align: center; margin: 20px 0;">
+                        ${countryElement ? countryElement.innerHTML : ''}
+                    </div>
+                    ${imageElement ? `<div style="text-align: center; margin: 20px 0;"><img src="${imageElement.src}" alt="Profile Image" style="max-width: 400px; border-radius: 10px;" /></div>` : ''}
+                `;
+
+                    // Extract and display the full biography iframe content with lazy images converted to regular images
+                    try {
+                        const base64Match = html.match(/Base64\.decode\("([^"]+)"/);
+                        if (base64Match && base64Match[1]) {
+                            let decodedBio = utf8DecodeBase64(base64Match[1]);
+
+                            // Convert all data-src attributes to src for images
+                            decodedBio = convertLazyImagesToRegular(decodedBio);
+
+                            // Create a complete HTML document for the iframe
+                            const bioHtml = `
+                            <!DOCTYPE html>
+                            <html>
+                            <head>
+                                <meta charset="UTF-8">
+                                <style>
+                                    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 15px; }
+                                    img { max-width: 100%; height: auto; }
+                                    a { color: #0066cc; }
+                                    a:hover { text-decoration: underline; }
+                                </style>
+                            </head>
+                            <body>${decodedBio}</body>
+                            </html>
+                        `;
+
+                            resultsHTML += `
+                            <iframe
+                                srcdoc="${bioHtml.replace(/"/g, '&quot;')}"
+                                class="bio-iframe"
+                                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                                frameborder="0"
+                                title="${upperCallsign} Biography">
+                            </iframe>
+                        `;
+                        } else {
+                            resultsHTML += '<p style="text-align: center; color: #666;">No biography available.</p>';
+                        }
+                    } catch (e) {
+                        console.error('Error extracting bio:', e);
+                        resultsHTML += '<p style="text-align: center; color: red;">Error loading biography.</p>';
+                    }
+
+                    if (awardsHTML) {
+                        resultsHTML += `
+                        <div class="awards-title">Awards</div>
+                        <div class="awards-container">
+                            ${awardsHTML}
+                        </div>
+                    `;
+                    }
+
+                    resultsDiv.innerHTML = resultsHTML;
+                })
+                .catch(error => {
+                    resultsDiv.innerHTML = `<p style="color: red; text-align: center;">Error fetching data: ${error.message}</p>`;
+                    console.error('Fetch error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
