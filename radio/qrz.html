@@ -10,36 +10,27 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
             padding: 20px;
         }
 
         .search-box {
             text-align: center;
-            margin: 50px 0;
+            margin: 20px 0;
         }
 
         #searchInput {
-            padding: 10px;
+            padding: 8px;
             font-size: 16px;
-            width: 300px;
+            width: 250px;
             border: 1px solid #ccc;
-            border-radius: 5px;
         }
 
         #searchButton {
-            padding: 10px 20px;
+            padding: 8px 16px;
             font-size: 16px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
 
@@ -48,10 +39,7 @@
         }
 
         #results {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
         img {
@@ -59,11 +47,7 @@
             height: auto;
         }
 
-        .bio-iframe {
-            width: 100%;
-            min-height: 600px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .bio-content {
             margin: 20px 0;
         }
 
@@ -76,30 +60,26 @@
         .awards-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
 
         .award-item {
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
+            padding: 5px;
             text-align: center;
-            flex: 1 1 200px;
-            background-color: white;
+            flex: 1 1 150px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Enter Callsign (e.g., FO5GJ)" />
-            <button id="searchButton">Search</button>
-        </div>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Enter Callsign (e.g., FO5GJ)" />
+        <button id="searchButton">Search</button>
+    </div>
 
-        <div id="results">
-            <p style="text-align: center; color: #666;">Enter a callsign and click Search to fetch data.</p>
-        </div>
+    <div id="results">
+        <p style="text-align: center; color: #666;">Enter a callsign and click Search to fetch data.</p>
     </div>
 
     <script>
@@ -112,7 +92,7 @@
         function convertLazyImagesToRegular(html) {
             return html.replace(/<img([^>]*)data-src="([^"]*)"([^>]*)>/g, function (match, p1, p2, p3) {
                 return `<img${p1}src="${p2}"${p3}`;
-            });
+            }).replace(/width="[^"]*"/g, '').replace(/height="[^"]*"/g, '');
         }
 
         document.getElementById('searchButton').addEventListener('click', fetchCallsignData);
@@ -162,7 +142,7 @@
                     <div style="text-align: center; margin: 20px 0;">
                         ${countryElement ? countryElement.innerHTML : ''}
                     </div>
-                    ${imageElement ? `<div style="text-align: center; margin: 20px 0;"><img src="${imageElement.src}" alt="Profile Image" style="max-width: 400px; border-radius: 10px;" /></div>` : ''}
+                    ${imageElement ? `<div style="text-align: center; margin: 20px 0;"><img src="${imageElement.src}" alt="Profile Image" style="max-width: 400px; height: auto; border-radius: 10px;" /></div>` : ''}
                 `;
 
                     // Extract and display the full biography iframe content with lazy images converted to regular images
@@ -192,13 +172,7 @@
                         `;
 
                             resultsHTML += `
-                            <iframe
-                                srcdoc="${bioHtml.replace(/"/g, '&quot;')}"
-                                class="bio-iframe"
-                                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                                frameborder="0"
-                                title="${upperCallsign} Biography">
-                            </iframe>
+                            <div class="bio-content">${decodedBio}</div>
                         `;
                         } else {
                             resultsHTML += '<p style="text-align: center; color: #666;">No biography available.</p>';
