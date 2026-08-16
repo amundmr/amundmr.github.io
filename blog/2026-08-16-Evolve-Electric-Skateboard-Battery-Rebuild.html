@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Amund Raniseth">
+<title>Evolve longbord battery rebuild</title>
+<link rel="stylesheet" href="../style.css">
+
+
+<h1>Rebuilding an Evolve Electric Skateboard Battery</h1>
+<hr>
+<sup><em>2026-08-16</em></sup>
+
+<h2>From a Spicy $150 Used Project to a Hill-Climbing Cruiser</h2>
+
+<p>
+    When we moved to Ålesund last year, we quickly made a great group of outdoorsy, active friends. Naturally, they had
+    been into action sports for years, while longboarding was a brand-new territory for both me and my wife. She quickly
+    got hooked on downhill longboarding, but that created a minor logistical problem: I spent way too much time playing
+    "uphill taxi", driving our car back and forth just to give her a tow back up the hills.
+</p>
+
+<p>
+    I needed a fun project so I could join in on the cruising, keep up with our friends on their Onewheels, and tow my
+    wife up those steep Ålesund inclines instead of using the car.
+</p>
+
+<p>
+    I took to the used market and stumbled across an Evolve Bamboo GT electric skateboard listed for around $150 (1,500
+    NOK). It was a pretty sketchy listing: the seller couldn't guarantee that a single component worked, and the board
+    arrived literally in pieces inside a cardboard box. Floating loosely alongside the ESC and motors was the original
+    Evolve battery pack — so swollen, bloated, and "spicy" that it was honestly a miracle the casing hadn't split wide
+    open.
+</p>
+
+<p>
+    Since I had an old e-scooter battery pack sitting on my workbench waiting for a second life, I decided to take the
+    gamble: I was going to rebuild this board from the ground up.
+</p>
+
+<p>
+    <img src="../img/posts/2026-08-16-Evolve-Electric-Skateboard-Battery-Rebuild/spicy-battery.png"
+        alt="Spicy swollen battery" width="100%">
+    <br><em>The reason the board was sold for $150: a dangerously bloated stock Evolve pack that went straight to
+        specialized recycling.</em>
+</p>
+
+<h2>Stage 1: The Bench Test &amp; The "Ghost Voltage" Trap</h2>
+
+<p>
+    Before committing to repacking and insulating the donor cells into a new 10S3P configuration, I needed to know if
+    the underlying electronics had survived. I laid out the BMS, ESC, and my temporary pack on the lab bench.
+</p>
+
+<p>
+    When hooking up the Evolve BMS, I immediately hit a classic multimeter puzzle:
+</p>
+
+<ul>
+    <li>Measuring directly between battery $(+)$ and $(-)$ gave <strong>34.9V / 35.0V</strong>.</li>
+    <li>Measuring between $(+)$ and <strong>B- out</strong> on the BMS gave <strong>31V</strong>.</li>
+    <li>Measuring between <strong>B- in</strong> and <strong>B- out</strong> gave <strong>0V</strong>.</li>
+</ul>
+
+<p>
+    Seeing ~31V on an unswitched output usually makes you wonder if a MOSFET has blown. However, this turned out to be
+    standard <strong>FET leakage current (ghost voltage)</strong>. Multimeters have a massive input impedance
+    (~10 MΩ). A tiny leakage current (μA) through the unpowered semiconductors or balance resistors is enough to show a
+    voltage reading on the meter. As soon as a real load is applied, that voltage collapses straight to 0V until the BMS
+    gets its wake-up signal from the ESC/charger.
+</p>
+
+<p>
+    Once I wired up the main power, the switch, and the UART line, the board came alive. I grabbed the R1 remote, gave
+    it a gentle pull, and both motors spun up smoothly. The
+    $150 gamble was paying off!
+</p>
+
+<p>
+    <img src="../img/posts/2026-08-16-Evolve-Electric-Skateboard-Battery-Rebuild/bench-test.png" alt="Bench test setup"
+        width="100%">
+    <br><em>Bench testing the $150 box-of-parts using the donor scooter cells to verify BMS and ESC logic.</em>
+</p>
+
+<h2>Stage 2: Layout Geometry and Board Flex</h2>
+
+<p>
+    Going from a compact "2x15 block" cell layout (how the donor scooter battery was packed) to a flat enclosure profile
+    is where the mechanical challenge starts.
+</p>
+
+<p>
+    Evolve Bamboo decks have a lot of flex. If you run rigid nickel strips continuously down the length of the board,
+    board flex will quickly fatigue the nickel, leading to micro-cracks, high resistance, or outright shorts.
+</p>
+
+<p>
+    To build a pack that survives the street:
+</p>
+
+<ol>
+    <li><strong>Segmented groups:</strong> I split the 10S3P pack into distinct parallel modules (3P) separated by foam
+        dampening strips.</li>
+    <li><strong>Flexible bridges:</strong> Instead of bridging flexing joints with flat nickel, I used fine-stranded
+        silicone wire jumpers with a small S-bend. Silicone wire handles torsion and bending indefinitely without
+        fatigue.</li>
+    <li><strong>Loads of insulation:</strong> Added electrical tape between every parallel group to minimize the risk of
+        rub-through between the cell groups.</li>
+</ol>
+
+<p>
+    <img src="../img/posts/2026-08-16-Evolve-Electric-Skateboard-Battery-Rebuild/new-pack.png" alt="New battery pack"
+        width="100%" />
+    <br><em>Custom 10S3P layout with foam dampening strips to handle board flex.</em>
+</p>
+
+<h2>Stage 3: Extra Clearance via 3D Printing</h2>
+
+<p>
+    Fitting a custom-built 10S3P assembly, the stock BMS, balance wiring, and main harness inside the original enclosure
+    turned out to be tighter than I liked. Squishing balance wires against the deck lid is a recipe for insulation wear
+    over time.
+</p>
+
+<p>
+    Instead of forcing it, I 3D printed <a href="https://www.thingiverse.com/thing:3230189" target="_blank">this</a>
+    pre-made riser. Thank you to the open-source community for sharing the
+    design files!
+</p>
+
+<p>
+    The riser sits flush between the deck and the stock plastic enclosure, adding just enough Z-height clearance to let
+    the battery breathe, keep the balance wire harness completely uncompressed, and preserve the original clean lines of
+    the board.
+</p>
+
+<p>
+    <img src="../img/posts/2026-08-16-Evolve-Electric-Skateboard-Battery-Rebuild/3d-printed-riser-installed.jpeg"
+        alt="Board profile with riser" width="100%">
+    <br><em>The custom 3D printed riser giving the battery pack and wiring harness the exact Z-clearance it needed.</em>
+</p>
+
+<h2>The Verdict</h2>
+
+<p>
+    After buttoning everything up, sealing the enclosure perimeter, and taking it out for a spin, the board rides
+    amazingly well. The throttle response is smooth, and the power this old e-scooter battery pack delivers is
+    surprisingly high.
+</p>
+
+<p>
+    Best of all: no more driving the car down the hill to pick up my wife, and I can finally cruise along
+    without breaking a sweat.
+</p>
+
+<p>
+    <img src="../img/posts/2026-08-16-Evolve-Electric-Skateboard-Battery-Rebuild/ready-2-shred.jpeg"
+        alt="The completed board" width="100%">
+    <br><em>The completed board, ready for action!</em>
+</p>
+
+</html>
